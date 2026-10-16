@@ -1812,6 +1812,7 @@ button,
   border-top-color: #f5f5f5;
   border-radius: 50%;
   animation: autark-spin 0.8s linear infinite;
+  will-change: transform;
   margin: 0 auto 16px; }
 .autark-showcase .autark-loading-title {
   font: 600 18px system-ui, sans-serif;

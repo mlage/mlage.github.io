@@ -70,6 +70,8 @@ if (canvas && status) {
             for (const layer of layers) {
                 const buildings = layer.type === 'buildings';
                 const collection = await db.getLayer(layer.name, buildings ? { osmElements: true } : undefined);
+                // Let the loading overlay paint before triangulating each layer.
+                await new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
                 map.loadCollection(layer.name, {
                     collection,
                     type: layer.type,
@@ -101,7 +103,12 @@ if (canvas && status) {
                 [-3100.33447265625 + offsetX, -2011.8787841796875 + offsetY, 2038.4637451171875],
                 [-3100.98291015625 + offsetX, -2012.3023681640625 + offsetY, 2039.09619140625],
             );
+            setStatus('Rendering the map…');
             map.draw();
+            // draw() schedules a frame: keep the spinner until it is submitted and completed.
+            await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await map.renderer.device.queue.onSubmittedWorkDone();
+            await new Promise((resolve) => requestAnimationFrame(resolve));
             // Allow the initial view to be calibrated from an interactively adjusted camera.
             window.autarkMap = map;
             setStatus('');
