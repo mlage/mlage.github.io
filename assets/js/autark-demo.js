@@ -28,8 +28,9 @@ if (canvas && status) {
             const db = new AutkDb();
             await db.init();
 
-            setStatus('Loading São Domingos layers…');
+            setStatus('Reading Niterói PBF…');
             await db.loadOsm({
+                pbfFileUrl: 'assets/data/niteroi.osm.pbf',
                 queryArea: { bbox: BBOX },
                 outputTableName: 'sao_domingos',
                 autoLoadLayers: { layers: LAYERS },
