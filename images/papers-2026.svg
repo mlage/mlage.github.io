@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Publicações de 2026</title>
+  <desc id="desc">Ilustração abstrata de documentos e dados conectados.</desc>
+  <rect width="800" height="500" fill="#f4f7f8"/>
+  <path d="M98 355 295 155l116 104 148-144 143 141" fill="none" stroke="#2f7c9f" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="98" cy="355" r="24" fill="#f56a6a"/>
+  <circle cx="295" cy="155" r="24" fill="#f56a6a"/>
+  <circle cx="411" cy="259" r="24" fill="#f56a6a"/>
+  <circle cx="559" cy="115" r="24" fill="#f56a6a"/>
+  <circle cx="702" cy="256" r="24" fill="#f56a6a"/>
+  <rect x="120" y="390" width="560" height="18" rx="9" fill="#dce5e8"/>
+  <rect x="226" y="425" width="348" height="14" rx="7" fill="#dce5e8"/>
+</svg>
