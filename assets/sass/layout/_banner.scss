@@ -26,6 +26,9 @@
 			height: auto;
 			width: 100%;
 			border-radius: 0.75em;
+			mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
+				linear-gradient(to bottom, transparent, #000 4%, #000 94%, transparent);
+			mask-composite: intersect;
 		}
 	}
 
