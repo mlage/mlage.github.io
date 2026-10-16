@@ -78,7 +78,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  background: rgb(4,4,4); }
+  background: #000000; }
   body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-resizing *, body.is-resizing *:before, body.is-resizing *:after {
     -moz-animation: none !important;
     -webkit-animation: none !important;
@@ -1755,7 +1755,7 @@ button,
 .autark-showcase .autark-explore:hover {
   background: #2444b1; }
 .autark-showcase .autark-map-card {
-  background: #040404;
+  background: #000000;
   border: 0;
   border-radius: 0.75em;
   overflow: hidden;

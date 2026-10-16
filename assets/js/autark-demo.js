@@ -54,7 +54,7 @@ if (canvas && status) {
                     ).join('')];
                 }),
             );
-            map.style.setCustomStyle({ ...appleColors, background: '#040404' });
+            map.style.setCustomStyle({ ...appleColors, background: '#000000' });
             await map.init();
 
             const layers = db.getLayersMetadata();
