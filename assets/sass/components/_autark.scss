@@ -33,7 +33,11 @@
 	.software-video {
 		display: block;
 		width: 100%;
+		max-width: 960px;
 		height: auto;
+		aspect-ratio: 5 / 3;
+		object-fit: contain;
+		margin: 0 auto;
 		border-radius: 0.75em;
 		background: #000;
 	}
