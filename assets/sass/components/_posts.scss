@@ -55,6 +55,16 @@
 					display: block;
 					width: 100%;
 				}
+
+				&.paper-image {
+					aspect-ratio: 16 / 9;
+					overflow: hidden;
+
+					img {
+						height: 100%;
+						object-fit: cover;
+					}
+				}
 			}
 		}
 
