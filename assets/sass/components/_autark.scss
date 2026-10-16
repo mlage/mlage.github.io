@@ -1,0 +1,80 @@
+/* Autark */
+
+	.autark-showcase {
+		display: grid;
+		gap: 2em;
+		grid-template-columns: minmax(12em, 0.7fr) minmax(0, 2fr);
+		align-items: center;
+
+		header.major {
+			margin-bottom: 1em;
+		}
+
+		p {
+			font-size: 0.9em;
+			margin-bottom: 1.5em;
+		}
+
+		.autark-map-card {
+			background: #f6f7f7;
+			border-radius: 0.375em;
+			overflow: hidden;
+			position: relative;
+		}
+
+		canvas {
+			display: block;
+			height: 28em;
+			touch-action: none;
+			width: 100%;
+		}
+
+		.autark-map-status,
+		.autark-map-location,
+		.autark-map-credit {
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 0.25em;
+			position: absolute;
+		}
+
+		.autark-map-status {
+			left: 1em;
+			padding: 0.45em 0.7em;
+			top: 1em;
+
+			&.is-error {
+				color: _palette(accent);
+			}
+		}
+
+		.autark-map-location {
+			bottom: 1em;
+			left: 1em;
+			padding: 0.6em 0.8em;
+
+			strong,
+			span {
+				display: block;
+			}
+
+			span,
+			.emphasis {
+				font-size: 0.8em;
+			}
+		}
+
+		.autark-map-credit {
+			bottom: 1em;
+			font-size: 0.7em;
+			padding: 0.35em 0.55em;
+			right: 1em;
+		}
+
+		@include breakpoint('<=medium') {
+			grid-template-columns: 1fr;
+
+			canvas {
+				height: 22em;
+			}
+		}
+	}

@@ -59,6 +59,24 @@
                     </span>
                 </section>
 
+                <!-- Autark -->
+                <section id="autark">
+                    <div class="autark-showcase">
+                        <div>
+                            <header class="major">
+                                <h2>Autark</h2>
+                            </header>
+                            <p>Urban visual analytics, entirely in the browser.</p>
+                            <a href="https://autarkjs.org/" class="button primary" target="_blank" rel="noopener noreferrer">Explore Autark</a>
+                        </div>
+                        <div class="autark-map-card">
+                            <canvas id="autark-map" aria-label="Interactive map of São Domingos, Niterói, with the Instituto de Computação at UFF marked"></canvas>
+                            <div id="autark-map-status" class="autark-map-status" role="status">Loading São Domingos…</div>
+                            <div class="autark-map-location"><strong>São Domingos, Niterói</strong><span>Instituto de Computação — UFF</span></div>
+                            <div class="autark-map-credit">© OpenStreetMap contributors</div>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Section -->
                 <section>
@@ -305,6 +323,8 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/@urban-toolkit/autk-map@4.1.1/dist/autk-map.umd.cjs"></script>
+    <script src="assets/js/autark-demo.js"></script>
 
 </body>
 <!-- Google tag (gtag.js) -->
