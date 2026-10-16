@@ -81,7 +81,14 @@
                         </div>
                         <div class="autark-map-card">
                             <canvas id="autark-map" aria-label="Interactive terrain map of central Niterói, with the Instituto de Computação at UFF marked"></canvas>
-                            <div id="autark-map-status" class="autark-map-status" role="status">Loading Niterói…</div>
+                            <div id="autark-map-status" class="autark-map-status" role="status" aria-live="polite">
+                                <div class="autark-loading-box">
+                                    <div class="autark-loading-spinner" aria-hidden="true"></div>
+                                    <h3 class="autark-loading-title">Loading</h3>
+                                    <p class="autark-loading-text">Initializing spatial database…</p>
+                                    <p class="autark-loading-note">Preparing the Niterói map.</p>
+                                </div>
+                            </div>
                             <div class="autark-map-help" aria-label="Map controls">
                                 <span><strong>click &amp; drag</strong> → pan</span>
                                 <span><strong>wheel</strong> → zoom</span>

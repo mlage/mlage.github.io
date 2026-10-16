@@ -8,10 +8,13 @@ const canvas = document.querySelector('#autark-map');
 const status = document.querySelector('#autark-map-status');
 
 if (canvas && status) {
-    const setStatus = (message, isError = false) => {
-        status.textContent = message;
+    const setStatus = (message, isError = false, note = '') => {
+        status.querySelector('.autark-loading-title').textContent = isError ? 'Loading Error' : 'Loading';
+        status.querySelector('.autark-loading-text').textContent = message;
+        status.querySelector('.autark-loading-note').textContent = note;
         status.classList.toggle('is-error', isError);
         status.hidden = !message;
+        canvas.setAttribute('aria-busy', String(Boolean(message) && !isError));
     };
 
     const start = async () => {
@@ -25,10 +28,11 @@ if (canvas && status) {
                 throw new Error('The Autark map library could not be loaded.');
             }
 
+            setStatus('Initializing spatial database…');
             const db = new AutkDb();
             await db.init();
 
-            setStatus('Reading Niterói PBF…');
+            setStatus('Loading local OSM PBF…', false, 'Reading buildings, roads, parks, water, and land surface.');
             await db.loadOsm({
                 pbfFileUrl: 'assets/data/niteroi.osm.pbf',
                 queryArea: { bbox: BBOX },
@@ -36,13 +40,14 @@ if (canvas && status) {
                 autoLoadLayers: { layers: LAYERS },
             });
 
-            setStatus('Loading Niterói terrain…');
+            setStatus('Loading Niterói terrain…', false, 'Preparing the elevation dataset.');
             await db.loadGeoTiff({
                 geotiffFileUrl: 'assets/data/niteroi-elevation.tif',
                 coordinateFormat: 'EPSG:3395',
                 outputTableName: 'niteroi_elevation',
             });
 
+            setStatus('Initializing map renderer…');
             const map = new toolkit.AutkMap(canvas, false);
             map.style.setPredefinedStyle('apple');
             // Keep the Apple layer palette; only the canvas background is black.
@@ -57,6 +62,7 @@ if (canvas && status) {
             map.style.setCustomStyle({ ...appleColors, background: '#000000' });
             await map.init();
 
+            setStatus('Building map layers…');
             const layers = db.getLayersMetadata();
             let buildingLayerId = '';
             let icUffBuildingIndex = -1;
@@ -101,7 +107,8 @@ if (canvas && status) {
             setStatus('');
         } catch (error) {
             console.error('Autark map failed to initialize:', error);
-            setStatus('This map requires WebGPU and network access.', true);
+            setStatus('The map could not be loaded.', true,
+                error instanceof Error ? error.message : 'Check WebGPU support and your network connection.');
         }
     };
 
