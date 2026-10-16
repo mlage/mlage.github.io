@@ -1,9 +1,11 @@
 /* Autark */
 .autark-showcase {
+	container-type: inline-size;
+
 	.autark-intro {
 		align-items: center;
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
 		gap: 1.5em 2em;
 		margin-bottom: 1.75em;
 	}
@@ -89,6 +91,17 @@
 
 		strong {
 			color: #3157d6;
+		}
+	}
+
+	@container (max-width: 620px) {
+		.autark-intro {
+			grid-template-columns: 1fr auto;
+		}
+
+		.autark-intro p {
+			grid-column: 1 / -1;
+			grid-row: 2;
 		}
 	}
 

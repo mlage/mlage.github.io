@@ -1724,10 +1724,12 @@ button,
       font-size: 1.25rem; } }
 
 /* Autark */
+.autark-showcase {
+  container-type: inline-size; }
 .autark-showcase .autark-intro {
   align-items: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 1.5em 2em;
   margin-bottom: 1.75em; }
 .autark-showcase .autark-brand {
@@ -1792,6 +1794,12 @@ button,
   right: 0.6em; }
 .autark-showcase .autark-map-help strong {
   color: #3157d6; }
+@container (max-width: 620px) {
+  .autark-showcase .autark-intro {
+    grid-template-columns: 1fr auto; }
+  .autark-showcase .autark-intro p {
+    grid-column: 1 / -1;
+    grid-row: 2; } }
 @media (prefers-color-scheme: dark) {
   .autark-showcase .autark-explore {
     background: #375bd9; } }
