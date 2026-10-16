@@ -1729,53 +1729,76 @@ button,
   gap: 2em;
   grid-template-columns: minmax(12em, 0.7fr) minmax(0, 2fr);
   align-items: center; }
-  .autark-showcase header.major {
-    margin-bottom: 1em; }
+  .autark-showcase .autark-logo {
+    display: block;
+    height: auto;
+    margin: 0 0 1.5em;
+    max-width: 12em;
+    width: 100%; }
   .autark-showcase p {
     font-size: 0.9em;
     margin-bottom: 1.5em; }
+  .autark-showcase .autark-intro .button.primary {
+    background-color: #3157d6;
+    box-shadow: inset 0 0 0 2px #3157d6; }
   .autark-showcase .autark-map-card {
-    background: #f6f7f7;
-    border-radius: 0.375em;
+    background: #e7f0f5;
+    border: 1px solid #3157d6;
+    border-radius: 0.5em;
     overflow: hidden;
     position: relative; }
   .autark-showcase canvas {
     display: block;
-    height: 28em;
+    height: 30em;
     touch-action: none;
     width: 100%; }
-  .autark-showcase .autark-map-status,
-  .autark-showcase .autark-map-location,
-  .autark-showcase .autark-map-credit {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 0.25em;
-    position: absolute; }
   .autark-showcase .autark-map-status {
-    left: 1em;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 0.25em;
     padding: 0.45em 0.7em;
-    top: 1em; }
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 1; }
     .autark-showcase .autark-map-status.is-error {
       color: #f56a6a; }
-  .autark-showcase .autark-map-location {
-    bottom: 1em;
-    left: 1em;
-    padding: 0.6em 0.8em; }
-    .autark-showcase .autark-map-location strong,
-    .autark-showcase .autark-map-location span {
+  .autark-showcase .autark-map-footer {
+    align-items: center;
+    background: #fff;
+    border-top: 1px solid #3157d6;
+    display: grid;
+    gap: 0.25em 1em;
+    grid-template-columns: 1fr auto;
+    padding: 0.8em 1.2em 0.55em; }
+    .autark-showcase .autark-map-footer strong,
+    .autark-showcase .autark-map-footer span {
       display: block; }
-    .autark-showcase .autark-map-location span,
-    .autark-showcase .autark-map-location .emphasis {
-      font-size: 0.8em; }
-  .autark-showcase .autark-map-credit {
-    bottom: 1em;
-    font-size: 0.7em;
-    padding: 0.35em 0.55em;
-    right: 1em; }
+    .autark-showcase .autark-map-footer strong {
+      color: #343741;
+      font-weight: 600; }
+    .autark-showcase .autark-map-footer span,
+    .autark-showcase .autark-map-footer small {
+      font-size: 0.75em; }
+    .autark-showcase .autark-map-footer a {
+      border-bottom: 0;
+      color: #3157d6;
+      font-size: 0.85em;
+      font-weight: 600; }
+    .autark-showcase .autark-map-footer small {
+      color: #8a8d95;
+      grid-column: 1 / -1; }
   @media screen and (max-width: 980px) {
     .autark-showcase {
       grid-template-columns: 1fr; }
       .autark-showcase canvas {
-        height: 22em; } }
+        height: 28em; } }
+  @media screen and (max-width: 736px) {
+    .autark-showcase canvas {
+      height: 24em; }
+    .autark-showcase .autark-map-footer {
+      grid-template-columns: 1fr; }
+      .autark-showcase .autark-map-footer a {
+        grid-row: 2; } }
 
 /* Posts */
 .posts {

@@ -62,18 +62,19 @@
                 <!-- Autark -->
                 <section id="autark">
                     <div class="autark-showcase">
-                        <div>
-                            <header class="major">
-                                <h2>Autark</h2>
-                            </header>
+                        <div class="autark-intro">
+                            <img class="autark-logo" src="images/autark-logo.svg" alt="Autark" />
                             <p>Urban visual analytics, entirely in the browser.</p>
                             <a href="https://autarkjs.org/" class="button primary" target="_blank" rel="noopener noreferrer">Explore Autark</a>
                         </div>
                         <div class="autark-map-card">
-                            <canvas id="autark-map" aria-label="Interactive map of São Domingos, Niterói, with the Instituto de Computação at UFF marked"></canvas>
+                            <canvas id="autark-map" aria-label="Interactive terrain map of São Domingos, Niterói, with the Instituto de Computação at UFF marked"></canvas>
                             <div id="autark-map-status" class="autark-map-status" role="status">Loading São Domingos…</div>
-                            <div class="autark-map-location"><strong>São Domingos, Niterói</strong><span>Instituto de Computação — UFF</span></div>
-                            <div class="autark-map-credit">© OpenStreetMap contributors · Terrain: Mapzen Terrarium</div>
+                            <footer class="autark-map-footer">
+                                <div><strong>Live result</strong><span>São Domingos, Niterói · IC/UFF</span></div>
+                                <a href="https://autarkjs.org/" target="_blank" rel="noopener noreferrer">See full example <span aria-hidden="true">→</span></a>
+                                <small>© OpenStreetMap contributors · Terrain: Mapzen Terrarium</small>
+                            </footer>
                         </div>
                     </div>
                 </section>

@@ -2,7 +2,7 @@ import { AutkDb } from '@urban-toolkit/autk-db';
 
 const BBOX = [-43.138, -22.909, -43.127, -22.900];
 const LAYERS = ['surface', 'parks', 'water', 'roads', 'buildings'];
-const IC_UFF = [-4801521.332, -2620594.455];
+const IC_UFF = [-4801521.332, -2603970.371];
 
 const canvas = document.querySelector('#autark-map');
 const status = document.querySelector('#autark-map-status');
@@ -43,11 +43,12 @@ if (canvas && status) {
                 outputTableName: 'niteroi_elevation',
             });
 
-            const map = new toolkit.AutkMap(canvas, false);
+            const map = new toolkit.AutkMap(canvas);
             map.style.setPredefinedStyle('poster');
             await map.init();
 
-            for (const layer of db.getLayersMetadata()) {
+            const layers = db.getLayersMetadata();
+            for (const layer of layers) {
                 map.loadCollection(layer.name, {
                     collection: await db.getLayer(layer.name),
                     type: layer.type,
@@ -72,12 +73,12 @@ if (canvas && status) {
             map.updateRenderInfo('ic-uff', { renderInfo: { pointSize: 30 } });
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
-            const project = (longitude, latitude) => [
-                6378137 * Math.PI * longitude / 180,
-                6378137 * Math.log(Math.tan(Math.PI / 4 + latitude * Math.PI / 360)),
-            ];
-            const [west, south] = project(BBOX[0], BBOX[1]);
-            const [east, north] = project(BBOX[2], BBOX[3]);
+            const surface = layers.find((layer) => layer.type === 'surface');
+            if (!surface) {
+                throw new Error('The São Domingos surface layer could not be loaded.');
+            }
+            const { minLon: west, minLat: south, maxLon: east, maxLat: north } =
+                await db.getBoundingBoxFromLayer(surface.name);
             const origin = map.layerManager.origin;
             const center = [(west + east) / 2 - origin[0], (south + north) / 2 - origin[1], 0];
             const height = Math.max(north - south, (east - west) / (canvas.clientWidth / canvas.clientHeight));
