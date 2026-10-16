@@ -1,92 +1,118 @@
 /* Autark */
-
-	.autark-showcase {
-		display: grid;
-		gap: 2em;
-		grid-template-columns: minmax(12em, 0.7fr) minmax(0, 2fr);
+.autark-showcase {
+	.autark-intro {
 		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5em 2em;
+		margin-bottom: 1.75em;
+	}
+
+	.autark-brand {
+		border: 0;
+		flex-shrink: 0;
+		line-height: 0;
+	}
+
+	.autark-logo {
+		display: block;
+		height: auto;
+		width: 170px;
+	}
+
+	.autark-intro p {
+		font-size: 0.95em;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.autark-explore {
+		background: #3157d6;
+		border: 0;
+		border-radius: 0.5em;
+		color: #fff !important;
+		font-weight: 600;
+		margin-left: auto;
+		padding: 0.75em 1.25em;
+
+		&:hover {
+			background: #2444b1;
+		}
+	}
+
+	.autark-map-card {
+		background: #e7f0f5;
+		border: 1px solid rgba(128, 144, 164, 0.3);
+		border-radius: 0.75em;
+		overflow: hidden;
+		position: relative;
+	}
+
+	canvas {
+		display: block;
+		height: 36em;
+		touch-action: none;
+		width: 100%;
+	}
+
+	.autark-map-status {
+		background: rgba(255, 255, 255, 0.95);
+		border-radius: 0.4em;
+		color: #343741;
+		padding: 0.5em 0.75em;
+		position: absolute;
+		right: 1em;
+		top: 1em;
+		z-index: 1;
+
+		&.is-error {
+			color: #a52b2b;
+		}
+	}
+
+	.autark-map-help {
+		background: rgba(255, 255, 255, 0.94);
+		border: 1px solid #ddd;
+		border-radius: 0.5em;
+		bottom: 1.5em;
+		color: #666;
+		display: flex;
+		flex-wrap: wrap;
+		font-size: 0.85em;
+		gap: 0.4em 1em;
+		justify-content: center;
+		left: 0.6em;
+		padding: 1em;
+		pointer-events: none;
+		position: absolute;
+		right: 0.6em;
+
+		strong {
+			color: #3157d6;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.autark-explore {
+			background: #375bd9;
+		}
+	}
+
+	@include breakpoint('<=small') {
+		.autark-intro {
+			gap: 1.25em;
+		}
 
 		.autark-logo {
-			display: block;
-			height: auto;
-			margin: 0 0 1.5em;
-			max-width: 12em;
-			width: 100%;
+			width: 145px;
 		}
 
-		p {
-			font-size: 0.9em;
-			margin-bottom: 1.5em;
-		}
-
-		.autark-intro .button.primary {
-			background-color: #3157d6;
-			box-shadow: inset 0 0 0 2px #3157d6;
-		}
-
-		.autark-map-card {
-			background: #e7f0f5;
-			border: 1px solid #3157d6;
-			border-radius: 0.5em;
-			overflow: hidden;
-			position: relative;
+		.autark-explore {
+			margin-left: 0;
 		}
 
 		canvas {
-			display: block;
-			height: 30em;
-			touch-action: none;
-			width: 100%;
-		}
-
-		.autark-map-status {
-			background: rgba(255, 255, 255, 0.92);
-			border-radius: 0.25em;
-			padding: 0.45em 0.7em;
-			position: absolute;
-			right: 1em;
-			top: 1em;
-			z-index: 1;
-
-			&.is-error {
-				color: _palette(accent);
-			}
-		}
-
-		.autark-map-help {
-			background: rgba(255, 255, 255, 0.92);
-			border: 1px solid #ddd;
-			border-radius: 0.5em;
-			bottom: 1.5em;
-			color: #666;
-			display: flex;
-			flex-wrap: wrap;
-			font-size: 0.85em;
-			gap: 0.4em 1em;
-			justify-content: center;
-			left: 0.6em;
-			padding: 1em;
-			pointer-events: none;
-			position: absolute;
-			right: 0.6em;
-
-			strong {
-				color: #3157d6;
-			}
-		}
-
-		@include breakpoint('<=medium') {
-			grid-template-columns: 1fr;
-
-			canvas {
-				height: 28em;
-			}
-		}
-
-		@include breakpoint('<=small') {
-			canvas {
-				height: 24em;
-			}
-
+			height: 28em;
 		}
 	}
+}

@@ -63,9 +63,14 @@
                 <section id="autark">
                     <div class="autark-showcase">
                         <div class="autark-intro">
-                            <img class="autark-logo" src="images/autark-logo.svg" alt="Autark" />
-                            <p>Urban visual analytics, entirely in the browser.</p>
-                            <a href="https://autarkjs.org/" class="button primary" target="_blank" rel="noopener noreferrer">Explore Autark</a>
+                            <a class="autark-brand" href="https://autarkjs.org/" aria-label="Autark website">
+                                <picture>
+                                    <source srcset="images/autark-logo-dark.png" media="(prefers-color-scheme: dark)" />
+                                    <img class="autark-logo" src="images/autark-logo-light.png" alt="Autark" width="640" height="236" />
+                                </picture>
+                            </a>
+                            <p>Urban visual analytics,<br />entirely in the browser.</p>
+                            <a href="https://autarkjs.org/" class="autark-explore" target="_blank" rel="noopener noreferrer">Explore Autark <span aria-hidden="true">↗</span></a>
                         </div>
                         <div class="autark-map-card">
                             <canvas id="autark-map" aria-label="Interactive terrain map of central Niterói, with the Instituto de Computação at UFF marked"></canvas>
