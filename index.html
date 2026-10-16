@@ -73,7 +73,7 @@
                             <canvas id="autark-map" aria-label="Interactive map of São Domingos, Niterói, with the Instituto de Computação at UFF marked"></canvas>
                             <div id="autark-map-status" class="autark-map-status" role="status">Loading São Domingos…</div>
                             <div class="autark-map-location"><strong>São Domingos, Niterói</strong><span>Instituto de Computação — UFF</span></div>
-                            <div class="autark-map-credit">© OpenStreetMap contributors</div>
+                            <div class="autark-map-credit">© OpenStreetMap contributors · Terrain: Mapzen Terrarium</div>
                         </div>
                     </div>
                 </section>
@@ -324,7 +324,10 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="https://unpkg.com/@urban-toolkit/autk-map@4.1.1/dist/autk-map.umd.cjs"></script>
-    <script src="assets/js/autark-demo.js"></script>
+    <script type="importmap">
+        {"imports":{"@urban-toolkit/autk-db":"https://unpkg.com/@urban-toolkit/autk-db@4.1.1/dist/browser.js","@duckdb/duckdb-wasm":"https://esm.sh/@duckdb/duckdb-wasm@1.33.1-dev57.0"}}
+    </script>
+    <script type="module" src="assets/js/autark-demo.js"></script>
 
 </body>
 <!-- Google tag (gtag.js) -->
