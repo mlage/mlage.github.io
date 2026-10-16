@@ -45,6 +45,16 @@ if (canvas && status) {
 
             const map = new toolkit.AutkMap(canvas);
             map.style.setPredefinedStyle('apple');
+            // Keep the Apple layer palette; only the canvas background is black.
+            const appleColors = Object.fromEntries(
+                [...LAYERS, 'points', 'polylines', 'polygons'].map((type) => {
+                    const { r, g, b } = map.style.getColor(type);
+                    return [type, '#' + [r, g, b].map((value) =>
+                        Math.round(value).toString(16).padStart(2, '0'),
+                    ).join('')];
+                }),
+            );
+            map.style.setCustomStyle({ ...appleColors, background: '#040404' });
             await map.init();
 
             const layers = db.getLayersMetadata();

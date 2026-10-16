@@ -41,7 +41,7 @@
 	}
 
 	.autark-map-card {
-		background: #e7f0f5;
+		background: #040404;
 		border: 1px solid rgba(128, 144, 164, 0.3);
 		border-radius: 0.75em;
 		overflow: hidden;
@@ -50,7 +50,7 @@
 
 	canvas {
 		display: block;
-		height: 36em;
+		height: clamp(360px, 45vw, 520px);
 		touch-action: none;
 		width: 100%;
 	}
