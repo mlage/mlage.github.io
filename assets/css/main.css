@@ -1779,6 +1779,9 @@ button,
 .autark-showcase .autark-explore:hover {
   background: #2444b1; }
 .autark-showcase .autark-map-card {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
   background: #000000;
   border: 0;
   border-radius: 0.75em;
