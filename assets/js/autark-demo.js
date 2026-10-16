@@ -93,6 +93,8 @@ if (canvas && status) {
                 ],
             );
             map.draw();
+            // Allow the initial view to be calibrated from an interactively adjusted camera.
+            window.autarkMap = map;
             setStatus('');
         } catch (error) {
             console.error('Autark map failed to initialize:', error);
