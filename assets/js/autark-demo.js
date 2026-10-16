@@ -32,7 +32,7 @@ if (canvas && status) {
             const db = new AutkDb();
             await db.init();
 
-            setStatus('Loading local OSM PBF…', false, 'Reading buildings, roads, parks, water, and land surface.');
+            setStatus('Loading Niterói map data…');
             await db.loadOsm({
                 pbfFileUrl: 'assets/data/niteroi.osm.pbf',
                 queryArea: { bbox: BBOX },
