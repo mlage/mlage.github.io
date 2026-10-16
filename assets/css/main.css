@@ -1723,7 +1723,10 @@ button,
     .features article .icon:before {
       font-size: 1.25rem; } }
 
-/* Autark */
+/* Software */
+#software > .autark-showcase + .autark-showcase {
+  margin-top: 3em; }
+
 .autark-showcase {
   container-type: inline-size; }
 .autark-showcase .autark-intro {
