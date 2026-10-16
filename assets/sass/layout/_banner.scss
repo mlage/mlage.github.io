@@ -3,25 +3,19 @@
 
 /* Banner */
 #banner {
-	display: flex;
-	align-items: flex-start;
-	gap: clamp(2em, 5vw, 4em);
-
 	h1 {
 		margin-top: -0.125em;
 	}
 
 	.content {
-		flex: 1;
-		min-width: 0;
-		max-width: 68ch;
+		display: flow-root;
 	}
 
 	.image {
 		display: block;
-		flex: 0 0 clamp(220px, 21vw, 280px);
-		margin: 0 0 0 auto;
-		width: clamp(220px, 21vw, 280px);
+		float: right;
+		margin: 0 0 1.5em 2.5em;
+		width: clamp(260px, 28vw, 340px);
 
 		img {
 			display: block;
@@ -31,14 +25,10 @@
 		}
 	}
 
-	@include breakpoint('<=medium') {
-		flex-direction: column-reverse;
-		gap: 2em;
-
+	@include breakpoint('<=small') {
 		.image {
-			flex: none;
-			margin: 0;
-			width: 180px;
+			margin: 0 0 1em 1.5em;
+			width: clamp(140px, 32vw, 220px);
 		}
 	}
 }
