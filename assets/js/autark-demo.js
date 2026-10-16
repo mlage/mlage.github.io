@@ -1,8 +1,8 @@
 import { AutkDb } from '@urban-toolkit/autk-db';
 
-const BBOX = [-43.1368, -22.9300, -43.1000, -22.8800];
+const BBOX = [-43.1368, -22.9070, -43.1000, -22.8800];
 const LAYERS = ['surface', 'parks', 'water', 'roads', 'buildings'];
-const IC_UFF = [-4801521.332, -2603970.371];
+const IC_UFF_BUILDING_ID = 'way/291725373';
 
 const canvas = document.querySelector('#autark-map');
 const status = document.querySelector('#autark-map-status');
@@ -48,25 +48,29 @@ if (canvas && status) {
             await map.init();
 
             const layers = db.getLayersMetadata();
+            let buildingLayerId = '';
+            let icUffBuildingIndex = -1;
+
             for (const layer of layers) {
+                const collection = await db.getLayer(layer.name);
                 map.loadCollection(layer.name, {
-                    collection: await db.getLayer(layer.name),
+                    collection,
                     type: layer.type,
                     loadConfig: layer.type === 'buildings' ? { buildingsZeroHeight: true } : undefined,
                 });
+                if (layer.type === 'buildings') {
+                    buildingLayerId = layer.name;
+                    icUffBuildingIndex = collection.features.findIndex((feature) =>
+                        feature.id === IC_UFF_BUILDING_ID ||
+                        feature.properties?.name === 'Instituto de Computação',
+                    );
+                }
             }
 
-            map.loadCollection('ic-uff', {
-                collection: {
-                    type: 'FeatureCollection',
-                    features: [{
-                        type: 'Feature',
-                        properties: { name: 'Instituto de Computação — UFF' },
-                        geometry: { type: 'Point', coordinates: IC_UFF },
-                    }],
-                },
-                type: 'points',
-            });
+            if (icUffBuildingIndex < 0) {
+                throw new Error('The Instituto de Computação building could not be found.');
+            }
+            map.setHighlightedIds(buildingLayerId, [icUffBuildingIndex]);
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
             const surface = layers.find((layer) => layer.type === 'surface');
