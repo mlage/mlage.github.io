@@ -73,14 +73,14 @@ if (canvas && status) {
             map.setHighlightedIds(buildingLayerId, [icUffBuildingIndex]);
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
-            // Focus on Gragoatá / Praia Vermelha, not the entire OSM selection.
+            // Frame the waterfront and central Niterói from above the bay.
             // Target coordinates use the database's EPSG:3395 projection.
             const origin = map.layerManager.origin;
-            const center = [-4801265.298 - origin[0], -2603645.938 - origin[1], 0];
-            const height = Math.max(1450, 1900 / (canvas.clientWidth / canvas.clientHeight));
+            const center = [-4800541 - origin[0], -2603000 - origin[1], 0];
+            const height = Math.max(2700, 3600 / (canvas.clientWidth / canvas.clientHeight));
             const distance = height / (2 * Math.tan(map.camera.getFovyRadians() / 2));
             const bearing = 25 * Math.PI / 180;
-            const tilt = 25 * Math.PI / 180;
+            const tilt = 45 * Math.PI / 180;
             const north = [-Math.sin(bearing), Math.cos(bearing)];
 
             map.camera.resetCamera(
