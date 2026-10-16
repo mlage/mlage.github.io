@@ -1756,7 +1756,7 @@ button,
   background: #2444b1; }
 .autark-showcase .autark-map-card {
   background: #040404;
-  border: 1px solid rgba(128, 144, 164, 0.3);
+  border: 0;
   border-radius: 0.75em;
   overflow: hidden;
   position: relative; }
@@ -1784,14 +1784,16 @@ button,
   color: #666;
   display: flex;
   flex-wrap: wrap;
-  font-size: 0.85em;
-  gap: 0.4em 1em;
+  font-size: 0.75em;
+  gap: 0.3em 0.8em;
   justify-content: center;
-  left: 0.6em;
-  padding: 1em;
+  left: 50%;
+  max-width: calc(100% - 2em);
+  padding: 0.5em 0.9em;
   pointer-events: none;
   position: absolute;
-  right: 0.6em; }
+  transform: translateX(-50%);
+  width: max-content; }
 .autark-showcase .autark-map-help strong {
   color: #3157d6; }
 @container (max-width: 620px) {

@@ -43,7 +43,7 @@ if (canvas && status) {
                 outputTableName: 'niteroi_elevation',
             });
 
-            const map = new toolkit.AutkMap(canvas);
+            const map = new toolkit.AutkMap(canvas, false);
             map.style.setPredefinedStyle('apple');
             // Keep the Apple layer palette; only the canvas background is black.
             const appleColors = Object.fromEntries(
@@ -80,6 +80,7 @@ if (canvas && status) {
             if (icUffBuildingIndex < 0) {
                 throw new Error('The Instituto de Computação building could not be found.');
             }
+            map.updateRenderInfo(buildingLayerId, { isPick: true });
             map.setHighlightedIds(buildingLayerId, [icUffBuildingIndex]);
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
