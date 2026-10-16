@@ -52,17 +52,17 @@ if (canvas && status) {
             let icUffBuildingIndex = -1;
 
             for (const layer of layers) {
-                const collection = await db.getLayer(layer.name);
+                const buildings = layer.type === 'buildings';
+                const collection = await db.getLayer(layer.name, buildings ? { osmElements: true } : undefined);
                 map.loadCollection(layer.name, {
                     collection,
                     type: layer.type,
-                    loadConfig: layer.type === 'buildings' ? { buildingsZeroHeight: true } : undefined,
+                    loadConfig: buildings ? { buildingsZeroHeight: true } : undefined,
                 });
-                if (layer.type === 'buildings') {
+                if (buildings) {
                     buildingLayerId = layer.name;
                     icUffBuildingIndex = collection.features.findIndex((feature) =>
-                        feature.id === IC_UFF_BUILDING_ID ||
-                        feature.properties?.name === 'Instituto de Computação',
+                        feature.id === IC_UFF_BUILDING_ID,
                     );
                 }
             }
@@ -73,18 +73,25 @@ if (canvas && status) {
             map.setHighlightedIds(buildingLayerId, [icUffBuildingIndex]);
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
-            const surface = layers.find((layer) => layer.type === 'surface');
-            if (!surface) {
-                throw new Error('The São Domingos surface layer could not be loaded.');
-            }
-            const { minLon: west, minLat: south, maxLon: east, maxLat: north } =
-                await db.getBoundingBoxFromLayer(surface.name);
+            // Focus on Gragoatá / Praia Vermelha, not the entire OSM selection.
+            // Target coordinates use the database's EPSG:3395 projection.
             const origin = map.layerManager.origin;
-            const center = [(west + east) / 2 - origin[0], (south + north) / 2 - origin[1], 0];
-            const height = Math.max(north - south, (east - west) / (canvas.clientWidth / canvas.clientHeight));
-            const distance = height * 1.08 / (2 * Math.tan(map.camera.getFovyRadians() / 2));
+            const center = [-4801265.298 - origin[0], -2603645.938 - origin[1], 0];
+            const height = Math.max(1450, 1900 / (canvas.clientWidth / canvas.clientHeight));
+            const distance = height / (2 * Math.tan(map.camera.getFovyRadians() / 2));
+            const bearing = 25 * Math.PI / 180;
+            const tilt = 25 * Math.PI / 180;
+            const north = [-Math.sin(bearing), Math.cos(bearing)];
 
-            map.camera.resetCamera([0, 1, 0], center, [center[0], center[1], distance]);
+            map.camera.resetCamera(
+                [north[0] * Math.cos(tilt), north[1] * Math.cos(tilt), Math.sin(tilt)],
+                center,
+                [
+                    center[0] - north[0] * distance * Math.sin(tilt),
+                    center[1] - north[1] * distance * Math.sin(tilt),
+                    distance * Math.cos(tilt),
+                ],
+            );
             map.draw();
             setStatus('');
         } catch (error) {
