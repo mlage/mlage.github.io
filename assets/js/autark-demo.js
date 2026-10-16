@@ -40,14 +40,12 @@ if (canvas && status) {
                 autoLoadLayers: { layers: LAYERS },
             });
 
-            setStatus('Loading Niterói terrain…', false, 'Preparing the elevation dataset.');
             await db.loadGeoTiff({
                 geotiffFileUrl: 'assets/data/niteroi-elevation.tif',
                 coordinateFormat: 'EPSG:3395',
                 outputTableName: 'niteroi_elevation',
             });
 
-            setStatus('Initializing map renderer…');
             const map = new toolkit.AutkMap(canvas, false);
             map.style.setPredefinedStyle('apple');
             // Keep the Apple layer palette; only the canvas background is black.
@@ -62,7 +60,6 @@ if (canvas && status) {
             map.style.setCustomStyle({ ...appleColors, background: '#000000' });
             await map.init();
 
-            setStatus('Building map layers…');
             const layers = db.getLayersMetadata();
             let buildingLayerId = '';
             let icUffBuildingIndex = -1;
@@ -103,7 +100,6 @@ if (canvas && status) {
                 [-3100.33447265625 + offsetX, -2011.8787841796875 + offsetY, 2038.4637451171875],
                 [-3100.98291015625 + offsetX, -2012.3023681640625 + offsetY, 2039.09619140625],
             );
-            setStatus('Rendering the map…');
             map.draw();
             // draw() schedules a frame: keep the spinner until it is submitted and completed.
             await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
