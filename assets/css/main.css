@@ -2200,6 +2200,8 @@ button,
   margin-top: -0.125em; }
 #banner .content {
   display: flow-root; }
+#banner .content > p {
+  text-align: justify; }
 #banner .image {
   display: block;
   float: right;

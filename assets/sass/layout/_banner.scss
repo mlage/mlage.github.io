@@ -9,6 +9,10 @@
 
 	.content {
 		display: flow-root;
+
+		> p {
+			text-align: justify;
+		}
 	}
 
 	.image {
