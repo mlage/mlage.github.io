@@ -1,6 +1,6 @@
 import { AutkDb } from '@urban-toolkit/autk-db';
 
-const BBOX = [-43.138, -22.909, -43.127, -22.900];
+const BBOX = [-43.1368, -22.9300, -43.1000, -22.8800];
 const LAYERS = ['surface', 'parks', 'water', 'roads', 'buildings'];
 const IC_UFF = [-4801521.332, -2603970.371];
 
@@ -44,7 +44,7 @@ if (canvas && status) {
             });
 
             const map = new toolkit.AutkMap(canvas);
-            map.style.setPredefinedStyle('poster');
+            map.style.setPredefinedStyle('apple');
             await map.init();
 
             const layers = db.getLayersMetadata();
@@ -54,9 +54,6 @@ if (canvas && status) {
                     type: layer.type,
                     loadConfig: layer.type === 'buildings' ? { buildingsZeroHeight: true } : undefined,
                 });
-                if (layer.type === 'roads') {
-                    map.updateRenderInfo(layer.name, { renderInfo: { polylinesWidth: 8 } });
-                }
             }
 
             map.loadCollection('ic-uff', {
@@ -70,7 +67,6 @@ if (canvas && status) {
                 },
                 type: 'points',
             });
-            map.updateRenderInfo('ic-uff', { renderInfo: { pointSize: 30 } });
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
             const surface = layers.find((layer) => layer.type === 'surface');
