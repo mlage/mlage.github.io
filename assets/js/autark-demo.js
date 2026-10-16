@@ -73,24 +73,16 @@ if (canvas && status) {
             map.setHighlightedIds(buildingLayerId, [icUffBuildingIndex]);
             map.enableTerrainMode(await db.getRaster('niteroi_elevation'), 'band_1');
 
-            // Frame the waterfront and central Niterói from above the bay.
-            // Target coordinates use the database's EPSG:3395 projection.
+            // Exact view captured from the interactively adjusted map.
+            const capturedOrigin = [-4799918.33, -2602648.74];
             const origin = map.layerManager.origin;
-            const center = [-4800541 - origin[0], -2603000 - origin[1], 0];
-            const height = Math.max(2700, 3600 / (canvas.clientWidth / canvas.clientHeight));
-            const distance = height / (2 * Math.tan(map.camera.getFovyRadians() / 2));
-            const bearing = 25 * Math.PI / 180;
-            const tilt = 45 * Math.PI / 180;
-            const north = [-Math.sin(bearing), Math.cos(bearing)];
+            const offsetX = capturedOrigin[0] - origin[0];
+            const offsetY = capturedOrigin[1] - origin[1];
 
             map.camera.resetCamera(
-                [north[0] * Math.cos(tilt), north[1] * Math.cos(tilt), Math.sin(tilt)],
-                center,
-                [
-                    center[0] - north[0] * distance * Math.sin(tilt),
-                    center[1] - north[1] * distance * Math.sin(tilt),
-                    distance * Math.cos(tilt),
-                ],
+                [0.5294870734214783, 0.34587764739990234, 0.7746044993400574],
+                [-3100.33447265625 + offsetX, -2011.8787841796875 + offsetY, 2038.4637451171875],
+                [-3100.98291015625 + offsetX, -2012.3023681640625 + offsetY, 2039.09619140625],
             );
             map.draw();
             // Allow the initial view to be calibrated from an interactively adjusted camera.
