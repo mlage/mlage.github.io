@@ -1,6 +1,6 @@
 import { AutkDb } from '@urban-toolkit/autk-db';
 
-const BBOX = [-43.1368, -22.9070, -43.1000, -22.8800];
+const BBOX = [-43.1368, -22.9090, -43.1000, -22.8800];
 const LAYERS = ['surface', 'parks', 'water', 'roads', 'buildings'];
 const IC_UFF_BUILDING_ID = 'way/291725373';
 
